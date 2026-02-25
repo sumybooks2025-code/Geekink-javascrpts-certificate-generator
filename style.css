@@ -1,0 +1,119 @@
+/* =========================
+   SUMYTECH SCHOOL CERTIFICATE GENERATOR
+   Custom Stylesheet
+   ========================= */
+
+/* ===== GLOBAL RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== BODY ENHANCEMENT ===== */
+body {
+  background: linear-gradient(to right, #e6f0ff, #f5faff);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ===== MAIN CONTAINER ===== */
+.container-shadow {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== HEADINGS ===== */
+h1 {
+  color: #0a2e73;
+  letter-spacing: 1px;
+}
+
+/* ===== INPUTS & SELECT ===== */
+input,
+select {
+  transition: all 0.3s ease;
+  border: 1px solid #d1d5db;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #1e40af;
+  box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.2);
+}
+
+/* ===== BUTTONS ===== */
+button {
+  transition: all 0.3s ease;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* ===== CERTIFICATE STYLING ===== */
+#certificate {
+  background: #ffffff;
+  min-height: 450px;
+  position: relative;
+  border-width: 10px !important;
+  border-image: linear-gradient(to right, #0a2e73, #0077b6) 1;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Decorative inner border */
+#certificate::before {
+  content: "";
+  position: absolute;
+  inset: 15px;
+  border: 2px solid #cbd5e1;
+  pointer-events: none;
+}
+
+/* ===== WATERMARK ===== */
+.watermark {
+  position: absolute;
+  opacity: 0.06;
+  width: 350px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  filter: grayscale(20%);
+}
+
+/* ===== CERTIFICATE TEXT ===== */
+#certificate h2 {
+  color: #0a2e73;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+#previewName {
+  border-bottom: 2px solid #1e3a8a;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+#previewCourse {
+  color: #075985;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  #certificate {
+    padding: 30px 20px !important;
+  }
+
+  .watermark {
+    width: 220px;
+  }
+
+  #certificate h2 {
+    font-size: 1.8rem
