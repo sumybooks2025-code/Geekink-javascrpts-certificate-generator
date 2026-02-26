@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>SumyTech School</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>SumyTech School</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- html2canvas -->
-  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<!-- html2canvas -->
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
-  <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
 
-  <style>
-    .watermark{
-      position:absolute;
-      opacity:0.08;
-      width:300px;
-      top:50%;
-      left:50%;
-      transform:translate(-50%,-50%);
-      pointer-events:none;
-    }
-  </style>
+<style>
+.watermark{
+position:absolute;
+opacity:0.08;
+width:300px;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+pointer-events:none;
+}
+</style>
 
 </head>
 
@@ -31,145 +31,109 @@
 
 <div class="max-w-4xl mx-auto bg-white p-6 rounded shadow-lg">
 
-  <h1 class="text-3xl font-bold text-center mb-6">
-    🎓 SumyTech School
-  </h1>
+<h1 class="text-3xl font-bold text-center mb-6">
+🎓 SumyTech School
+</h1>
 
-  <!-- LINK TO STUDENTS CSV -->
-  <div class="mb-4 text-right">
-    <a href="students.csv" download class="text-blue-600 underline hover:text-blue-800">
-      📥 Download Students CSV
-    </a>
-  </div>
+<!-- CSV DOWNLOAD -->
+<div class="mb-4 text-right">
+<a href="students.csv" download
+class="text-blue-600 underline hover:text-blue-800">
+📥 Download Students CSV
+</a>
+</div>
 
-  <!-- STUDENT SELECT (Loaded from CSV) -->
-  <div class="mb-4">
-  <label class="font-semibold">Select Student</label>
+<!-- STUDENT DROPDOWN -->
+<div class="mb-4">
 
-  <select id="studentSelect" class="border p-2 rounded w-full mt-1">
-    <option value="">-- Choose Student --<a href="students.csv" download class="text-blue-600 underline hover:text-blue-800">
-      
-   <select Id="Sumayya Tijjani Muhammad ,Full Stack Development ,2026-01-15 [0]
-      
-   Ibrahim Musa,JavaScript Foundations,2026-01-20 [1]
-      
-   Fatima Yusuf,Web Design Basics,2026-01-25 [2]
-      
-   Sadiq Ahmed,Front-End Development ,2026-01-28 [3]
-      
-   Abimbola Adedoja, UI/UX design, 2026-02-01 [4] </li>
-      
-   Winnie Macbonne, AI and Machine Learning, 2026-02-4 [5]
-      
-      Aisha Bello,Frontend Development,2026-01-15 [6]
-      
-   Ibrahim Musa,JavaScript Foundations,2026-01-20 [7]
-      
-   Fatima Yusuf,Web Design Basics,2026-01-25 [8]
-      
-   Sadiq Ahmed,Full Stack Introduction,2026-02-01 [9]
-      
-   Maryam Abdullahi,HTML & CSS Mastery,2026-02-05 [10]
-      
-   Yusuf Garba,Advanced JavaScript,2026-02-07 [11]
-      
-   Zainab Lawal,Responsive Web Design,2026-02-10 [12]
-      
-   Usman Aliyu,React Basics,2026-02-12 [13]
-      
-   Hauwa Sule,UI/UX Fundamentals,2026-02-15 [14]
-      
-   Abdulrahman Idris,Backend Development Intro,2026-02-18 [15]
-      
-   Khadija Mohammed,Full Stack Bootcamp,2026-02-20 [16]
-      
-   Muhammad Bashir,Web Application Deployment,2026-02-22 [17]
-      
-   Aminat Sani,JavaScript DOM Projects,2026-02-24 [18]
-      
-   Bilal Ahmed,Git & GitHub Essentials,2026-02-26 [19]
-      
-    
-   Safiya Ibrahim,Modern Web APIs,2026-02-28      [20] option value>
-    
+<label class="font-semibold">Choose Student</label>
 
+<select id="studentSelect"
+class="border p-2 rounded w-full mt-1">
 
-    </a>
-    </option>
-  </select>
+<option value="">-- Select Student From CSV --</option>
+
+</select>
+
+<button onclick="fillStudentData()"
+class="mt-2 bg-blue-500 text-white px-4 py-2 rounded">
+Choose
+</button>
 
 </div>
 
-  <!-- FORM -->
-  <div class="grid md:grid-cols-3 gap-4 mb-6">
+<!-- FORM -->
+<div class="grid md:grid-cols-3 gap-4 mb-6">
 
-    <input id="studentName" type="text" placeholder="Student Name"
-    class="border p-2 rounded w-full">
+<input id="studentName" type="text"
+placeholder="Student Name"
+class="border p-2 rounded w-full">
 
-    <input id="courseName" type="text" placeholder="Course Name"
-    class="border p-2 rounded w-full">
+<input id="courseName" type="text"
+placeholder="Course Name"
+class="border p-2 rounded w-full">
 
-    <input id="completionDate" type="date"
-    class="border p-2 rounded w-full">
+<input id="completionDate" type="date"
+class="border p-2 rounded w-full">
 
-  </div>
+</div>
 
-  <div class="flex gap-4 mb-6">
+<div class="flex gap-4 mb-6">
 
-    <button onclick="generateCertificate()"
-    class="bg-blue-600 text-white px-4 py-2 rounded">
-      Generate Certificate
-    </button>
+<button onclick="generateCertificate()"
+class="bg-blue-600 text-white px-4 py-2 rounded">
+Generate Certificate
+</button>
 
-    <button onclick="downloadCertificate()"
-    class="bg-green-600 text-white px-4 py-2 rounded">
-      Download Certificate
-    </button>
+<button onclick="downloadCertificate()"
+class="bg-green-600 text-white px-4 py-2 rounded">
+Download Certificate
+</button>
 
-  </div>
+</div>
 
-  <!-- CERTIFICATE PREVIEW -->
-  <div id="certificate"
-  class="relative bg-white border-8 border-blue-800 p-10 text-center overflow-hidden">
+<!-- CERTIFICATE -->
+<div id="certificate"
+class="relative bg-white border-8 border-blue-800 p-10 text-center overflow-hidden">
 
-    <!-- SUMYTECH WATERMARK -->
-    <img src="logo.png" class="watermark" alt="SumyTech School">
+<!-- WATERMARK LOGO -->
+<img src="logo.png" class="watermark" alt="SumyTech Logo">
 
-    <h2 class="text-4xl font-bold mb-4">
-      Certificate of Completion
-    </h2>
+<h2 class="text-4xl font-bold mb-4">
+Certificate of Completion
+</h2>
 
-    <p class="text-lg mb-4">
-      This is to certify that
-    </p>
+<p class="text-lg mb-4">
+This is to certify that
+</p>
 
-    <h3 id="previewName"
-    class="text-3xl font-semibold text-blue-700">
-      Student Name
-    </h3>
+<h3 id="previewName"
+class="text-3xl font-semibold text-blue-700">
+Student Name
+</h3>
 
-    <p class="mt-4">
-      has successfully completed
-    </p>
+<p class="mt-4">
+has successfully completed
+</p>
 
-    <h3 id="previewCourse"
-    class="text-2xl font-semibold mt-2">
-      Course Name
-    </h3>
+<h3 id="previewCourse"
+class="text-2xl font-semibold mt-2">
+Course Name
+</h3>
 
-    <p class="mt-4">
-      Date: <span id="previewDate">Completion Date</span>
-    </p>
+<p class="mt-4">
+Date: <span id="previewDate">Completion Date</span>
+</p>
 
-    <p class="mt-8 font-bold">
-      Instructor: SumyTech School
-    </p>
+<p class="mt-8 font-bold">
+Instructor: SumyTech School
+</p>
 
-  </div>
+</div>
 
 </div>
 
 <script src="index.js"></script>
 
 </body>
-  </html>
+</html>
