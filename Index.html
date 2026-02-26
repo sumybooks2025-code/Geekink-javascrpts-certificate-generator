@@ -43,22 +43,43 @@ class="text-blue-600 underline hover:text-blue-800">
 </a>
 </div>
 
-<!-- STUDENT DROPDOWN -->
-<div class="mb-4">
+<!-- ===============================
+     STUDENT SEARCH AND SELECTION
+================================ -->
+<div class="w-full max-w-md space-y-3 mb-6">
 
-<label class="font-semibold">Choose Student</label>
+  <!-- Search Student -->
+  <div>
+    <label for="searchStudent" class="block text-sm font-semibold mb-1">
+      Search Student
+    </label>
 
-<select id="studentSelect"
-class="border p-2 rounded w-full mt-1">
+    <input
+      id="searchStudent"
+      type="text"
+      placeholder="Search student name..."
+      class="border border-gray-300 p-2 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+    >
+  </div>
 
-<option value="">-- Select Student From CSV --</option>
+  <!-- Student Dropdown -->
+  <div>
+    <label for="studentSelect" class="block text-sm font-semibold mb-1">
+      Choose Student
+    </label>
 
-</select>
+    <select
+      id="studentSelect"
+      class="border border-gray-300 p-2 rounded w-full bg-white focus:outline-none focus:ring-2 focus:ring-blue-400"
+    >
+      <option value="">Select Student</option>
+    </select>
+  </div>
 
-<button onclick="fillStudentData()"
-class="mt-2 bg-blue-500 text-white px-4 py-2 rounded">
-Choose
-</button>
+  <button onclick="fillStudentData()"
+  class="mt-2 bg-blue-500 text-white px-4 py-2 rounded">
+  Choose
+  </button>
 
 </div>
 
@@ -136,4 +157,4 @@ Instructor: SumyTech School
 <script src="index.js"></script>
 
 </body>
-</html>
+        </html>
