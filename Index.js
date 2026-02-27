@@ -1,138 +1,127 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>SumyTech School</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+// GET ELEMENTS
+const studentList = document.getElementById("studentList");
+const searchStudent = document.getElementById("searchStudent");
 
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+const studentNameInput = document.getElementById("studentName");
+const courseInput = document.getElementById("courseName");
+const dateInput = document.getElementById("completionDate");
 
-<link rel="stylesheet" href="style.css">
+const previewName = document.getElementById("previewName");
+const previewCourse = document.getElementById("previewCourse");
+const previewDate = document.getElementById("previewDate");
 
-<style>
-.watermark{
-position:absolute;
-opacity:0.08;
-width:300px;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-pointer-events:none;
+let students = [];
+
+// LOAD CSV
+fetch("students.csv")
+.then(res => res.text())
+.then(data => {
+
+const rows = data.split("\n").slice(1);
+
+rows.forEach((row,index)=>{
+
+const cols = row.split(",");
+
+if(cols.length >=3){
+
+const student = {
+name: cols[0].trim(),
+course: cols[1].trim(),
+date: cols[2].trim()
+};
+
+students.push(student);
+
+createStudentItem(student,index);
+
 }
-</style>
 
-</head>
+});
 
-<body class="bg-gray-100 p-6">
+});
 
-<div class="max-w-4xl mx-auto bg-white p-6 rounded shadow-lg">
+// CREATE STUDENT LIST ITEM
+function createStudentItem(student,index){
 
-<h1 class="text-3xl font-bold text-center mb-6">
-🎓 SumyTech School
-</h1>
+const label = document.createElement("label");
 
-<!-- CSV DOWNLOAD -->
-<div class="mb-4 text-right">
-<a href="students.csv" download
-class="text-blue-600 underline hover:text-blue-800">
-📥 Download Students CSV
-</a>
-</div>
+label.className =
+"flex justify-between items-center border-b p-3 cursor-pointer hover:bg-gray-100";
 
-<!-- STUDENT SEARCH -->
-<div class="mb-4">
-<input
-id="searchStudent"
-type="text"
-placeholder="Search student..."
-class="border p-2 rounded w-full">
-</div>
+label.innerHTML = `
+<span>${student.name}</span>
+<input type="radio" name="studentRadio" value="${index}">
+`;
 
-<!-- STUDENT LIST -->
-<div id="studentList"
-class="border rounded max-h-72 overflow-y-auto bg-white">
+studentList.appendChild(label);
 
-<!-- Students from CSV will appear here -->
+}
 
-</div>
+// SEARCH STUDENT
+searchStudent.addEventListener("input", function(){
 
-<button onclick="fillStudentData()"
-class="mt-3 bg-blue-600 text-white px-4 py-2 rounded">
-Choose Student
-</button>
+const keyword = this.value.toLowerCase();
 
-<!-- FORM -->
-<div class="grid md:grid-cols-3 gap-4 mt-6 mb-6">
+studentList.innerHTML = "";
 
-<input id="studentName" type="text"
-placeholder="Student Name"
-class="border p-2 rounded w-full">
+students.forEach((student,index)=>{
 
-<input id="courseName" type="text"
-placeholder="Course Name"
-class="border p-2 rounded w-full">
+if(student.name.toLowerCase().includes(keyword)){
 
-<input id="completionDate" type="date"
-class="border p-2 rounded w-full">
+createStudentItem(student,index);
 
-</div>
+}
 
-<div class="flex gap-4 mb-6">
+});
 
-<button onclick="generateCertificate()"
-class="bg-blue-600 text-white px-4 py-2 rounded">
-Generate Certificate
-</button>
+});
 
-<button onclick="downloadCertificate()"
-class="bg-green-600 text-white px-4 py-2 rounded">
-Download Certificate
-</button>
+// FILL FORM
+function fillStudentData(){
 
-</div>
+const selected =
+document.querySelector('input[name="studentRadio"]:checked');
 
-<!-- CERTIFICATE -->
-<div id="certificate"
-class="relative bg-white border-8 border-blue-800 p-10 text-center overflow-hidden">
+if(!selected){
+alert("Select a student");
+return;
+}
 
-<img src="logo.png" class="watermark">
+const student = students[selected.value];
 
-<h2 class="text-4xl font-bold mb-4">
-Certificate of Completion
-</h2>
+studentNameInput.value = student.name;
+courseInput.value = student.course;
+dateInput.value = student.date;
 
-<p class="text-lg mb-4">
-This is to certify that
-</p>
+generateCertificate();
 
-<h3 id="previewName"
-class="text-3xl font-semibold text-blue-700">
-Student Name
-</h3>
+}
 
-<p class="mt-4">
-has successfully completed
-</p>
+// GENERATE CERTIFICATE
+function generateCertificate(){
 
-<h3 id="previewCourse"
-class="text-2xl font-semibold mt-2">
-Course Name
-</h3>
+previewName.textContent = studentNameInput.value;
+previewCourse.textContent = courseInput.value;
+previewDate.textContent = dateInput.value;
 
-<p class="mt-4">
-Date: <span id="previewDate">Completion Date</span>
-</p>
+}
 
-<p class="mt-8 font-bold">
-Instructor: SumyTech School
-</p>
+// DOWNLOAD CERTIFICATE
+function downloadCertificate(){
 
-</div>
+const certificate = document.getElementById("certificate");
 
-</div>
+html2canvas(certificate).then(canvas => {
 
-<script src="index.js"></script>
+const link = document.createElement("a");
 
-</body>
-</html>
+link.download = studentNameInput.value + "_certificate.png";
+
+link.href = canvas.toDataURL();
+
+link.click();
+
+});
+
+}
