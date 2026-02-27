@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,10 +6,7 @@
 <title>SumyTech School</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Tailwind CDN -->
 <script src="https://cdn.tailwindcss.com"></script>
-
-<!-- html2canvas -->
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
 <link rel="stylesheet" href="style.css">
@@ -43,48 +41,30 @@ class="text-blue-600 underline hover:text-blue-800">
 </a>
 </div>
 
-<!-- ===============================
-     STUDENT SEARCH AND SELECTION
-================================ -->
-<div class="w-full max-w-md space-y-3 mb-6">
+<!-- STUDENT SEARCH -->
+<div class="mb-4">
+<input
+id="searchStudent"
+type="text"
+placeholder="Search student..."
+class="border p-2 rounded w-full">
+</div>
 
-  <!-- Search Student -->
-  <div>
-    <label for="searchStudent" class="block text-sm font-semibold mb-1">
-      Search Student
-    </label>
+<!-- STUDENT LIST -->
+<div id="studentList"
+class="border rounded max-h-72 overflow-y-auto bg-white">
 
-    <input
-      id="searchStudent"
-      type="text"
-      placeholder="Search student name..."
-      class="border border-gray-300 p-2 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
-    >
-  </div>
-
-  <!-- Student Dropdown -->
-  <div>
-    <label for="studentSelect" class="block text-sm font-semibold mb-1">
-      Choose Student
-    </label>
-
-    <select
-      id="studentSelect"
-      class="border border-gray-300 p-2 rounded w-full bg-white focus:outline-none focus:ring-2 focus:ring-blue-400"
-    >
-      <option value="">Select Student</option>
-    </select>
-  </div>
-
-  <button onclick="fillStudentData()"
-  class="mt-2 bg-blue-500 text-white px-4 py-2 rounded">
-  Choose
-  </button>
+<!-- Students from CSV will appear here -->
 
 </div>
 
+<button onclick="fillStudentData()"
+class="mt-3 bg-blue-600 text-white px-4 py-2 rounded">
+Choose Student
+</button>
+
 <!-- FORM -->
-<div class="grid md:grid-cols-3 gap-4 mb-6">
+<div class="grid md:grid-cols-3 gap-4 mt-6 mb-6">
 
 <input id="studentName" type="text"
 placeholder="Student Name"
@@ -117,8 +97,7 @@ Download Certificate
 <div id="certificate"
 class="relative bg-white border-8 border-blue-800 p-10 text-center overflow-hidden">
 
-<!-- WATERMARK LOGO -->
-<img src="logo.png" class="watermark" alt="SumyTech School">
+<img src="logo.png" class="watermark">
 
 <h2 class="text-4xl font-bold mb-4">
 Certificate of Completion
@@ -157,4 +136,4 @@ Instructor: SumyTech School
 <script src="index.js"></script>
 
 </body>
-        </html>
+</html>
